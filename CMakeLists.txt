@@ -1,0 +1,46 @@
+cmake_minimum_required(VERSION 3.20)
+project(EverybodyCodes CXX)
+
+# Set C++20 standard
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Enable debug info and optimizations
+set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 -Wall -Wextra")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+
+# Default to Release build
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+
+# Include src directory for headers
+include_directories(src)
+
+# Add common utilities subdirectory
+add_subdirectory(src/common)
+
+# Add quest subdirectories
+add_subdirectory(src/quest01)
+
+# Create main executable
+add_executable(everybodycodes src/main.cpp)
+
+# Link against quest libraries
+target_link_libraries(everybodycodes utils quest01)
+
+# Print build information
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+message(STATUS "C++ standard: ${CMAKE_CXX_STANDARD}")
+
+# Copy input files to build directory for each quest
+function(copy_quest_inputs quest_name)
+  file(GLOB INPUT_FILES "src/${quest_name}/*.txt")
+  foreach(INPUT_FILE ${INPUT_FILES})
+    get_filename_component(INPUT_NAME ${INPUT_FILE} NAME)
+    configure_file(${INPUT_FILE} ${CMAKE_BINARY_DIR}/${INPUT_NAME} COPYONLY)
+  endforeach()
+endfunction()
+
+# Copy inputs for quests
+copy_quest_inputs(quest01)
