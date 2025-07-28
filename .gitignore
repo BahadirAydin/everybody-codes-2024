@@ -39,3 +39,10 @@
 
 # debug information files
 *.dwo
+
+# ignnore cache folder
+.cache
+
+# ignore build artifacts
+out
+build
