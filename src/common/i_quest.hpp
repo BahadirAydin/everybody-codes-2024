@@ -16,6 +16,9 @@ class i_quest {
     // Solves part 2 and returns the result (any type)
     virtual std::any solve_p2() = 0;
 
+    // Solves part 3 and returns the result (any type)
+    virtual std::any solve_p3() = 0;
+
     // Returns the name of the quest
     virtual std::string name() const = 0;
 
@@ -41,8 +44,16 @@ class i_quest {
         auto end_2 = high_resolution_clock::now();
         auto duration_2 = duration_cast<microseconds>(end_2 - start_2);
 
+        load_input(
+            "everybody_codes_e2024_q01_p3.txt"); // Load input data for part 3
+        auto start_3 = high_resolution_clock::now();
+        auto result_3 = solve_p3();
+        auto end_3 = high_resolution_clock::now();
+        auto duration_3 = duration_cast<microseconds>(end_3 - start_3);
+
         print_result(result_1, "part_1", duration_1);
         print_result(result_2, "part_2", duration_2);
+        print_result(result_3, "part_3", duration_3);
     }
 
   private:

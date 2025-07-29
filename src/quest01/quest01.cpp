@@ -53,6 +53,11 @@ std::any quest_01::solve_p2() {
     return result;
 }
 
+std::any quest_01::solve_p3() {
+    // !unimplemented
+    return 0;
+}
+
 void quest_01::load_input(const std::string &filename) {
     input_data = utils::read_file(filename);
     if (input_data.empty()) {
