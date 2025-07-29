@@ -3,17 +3,17 @@
 #include <numeric>
 
 std::any quest_01::solve_p1() {
-    int result = std::accumulate(input_data.begin(), input_data.end(), 0,
-                                 [](int sum, char c) {
-                                     switch (c) {
-                                     case 'B':
-                                         return sum + 1;
-                                     case 'C':
-                                         return sum + 3;
-                                     default:
-                                         return sum; // Ignore other characters
-                                     }
-                                 });
+    static const std::array<int, 256> points = [] {
+        std::array<int, 256> table{};
+        table['B'] = 1; // B is worth 1 point
+        table['C'] = 3; // C is worth 3 points
+                        // No D character in this part of the quest
+        return table;
+    }();
+    int result = std::accumulate(
+        input_data.begin(), input_data.end(), 0, [](int sum, char c) {
+            return sum + points[static_cast<unsigned char>(c)];
+        });
     return result;
 }
 std::any quest_01::solve_p2() {
