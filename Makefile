@@ -1,8 +1,8 @@
 .PHONY: all debug release
 
 # Directory names
-BUILD_DIR_DEBUG := out/debug
-BUILD_DIR_RELEASE := out/release
+BUILD_DIR_DEBUG := out/Debug
+BUILD_DIR_RELEASE := out/Release
 
 # Default target
 default: release
