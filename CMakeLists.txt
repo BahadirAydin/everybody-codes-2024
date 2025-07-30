@@ -9,9 +9,27 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 -Wall -Wextra")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
 
+# Add common warning flags
+add_compile_options(
+  -Wall # All common warnings
+  -Wextra # Extra warnings
+  -Wpedantic # Enforce strict ISO C++ compliance
+  -Wconversion # Implicit conversions that may alter values
+  -Wsign-conversion # Signed/unsigned conversions
+  -Wshadow # Variable shadowing
+  -Wnon-virtual-dtor # Warn if base class has non-virtual destructor
+  -Wold-style-cast # Warn on C-style casts
+  -Wnull-dereference # Detect null dereferencing
+)
+
 # Default to Release build
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
+endif()
+
+# Treat warnings as errors in debug builds
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  add_compile_options(-Werror)
 endif()
 
 # Include src directory for headers
