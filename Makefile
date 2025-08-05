@@ -1,4 +1,4 @@
-.PHONY: all debug release
+.PHONY: all debug release run
 
 # Directory names
 BUILD_DIR_DEBUG := out/Debug
@@ -16,6 +16,10 @@ debug:
 release:
 	cmake -S . -B $(BUILD_DIR_RELEASE) -DCMAKE_BUILD_TYPE=Release
 	cmake --build $(BUILD_DIR_RELEASE)
+
+# Run release
+run: release
+	cd $(BUILD_DIR_RELEASE) && ./everybodycodes
 
 # Build both
 all: debug release
