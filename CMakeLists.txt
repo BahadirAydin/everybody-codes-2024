@@ -40,12 +40,14 @@ add_subdirectory(src/common)
 
 # Add quest subdirectories
 add_subdirectory(src/quest01)
+add_subdirectory(src/quest02)
 
 # Create main executable
 add_executable(everybodycodes src/main.cpp)
 
 # Link against quest libraries
 target_link_libraries(everybodycodes utils quest01)
+target_link_libraries(everybodycodes utils quest02)
 
 # Print build information
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
@@ -62,3 +64,4 @@ endfunction()
 
 # Copy inputs for quests
 copy_quest_inputs(quest01)
+copy_quest_inputs(quest02)
